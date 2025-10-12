@@ -1,5 +1,38 @@
-// Room Types
-export const ROOM_TYPES = ['Single', 'Double', 'Suite', 'Deluxe'];
+// FIXED: Updated to include ALL room types from the database
+export const ROOM_TYPES = [
+  'Single',
+  'Double',
+  'Twin',
+  'Suite',
+  'Deluxe',
+  'Deluxe Single',
+  'Deluxe Double',
+  'Deluxe Twin',
+  'Family Room',
+  'Executive Single',
+  'Executive Double',
+  'Executive Suite',
+  'Business Suite',
+  'Junior Suite',
+  'Luxury Suite',
+  'Presidential Suite',
+  'Honeymoon Suite',
+  'Penthouse Suite',
+  'Royal Suite',
+  'Studio Apartment',
+  'One Bedroom Suite',
+  'Two Bedroom Suite',
+  'Garden View Room',
+  'Ocean View Room',
+  'Mountain View Room',
+  'Accessible Room',
+  'Economy Single',
+  'Economy Double',
+  'Budget Twin',
+  'Dormitory 4-Bed',
+  'Dormitory 6-Bed',
+  'Dormitory 8-Bed'
+];
 
 // Booking Status
 export const BOOKING_STATUS = {
@@ -45,7 +78,7 @@ export const VALIDATION_RULES = {
 // API Configuration
 export const API_CONFIG = {
   BASE_URL: 'http://localhost:8080/api',
-  TIMEOUT: 10000, // 10 seconds
+  TIMEOUT: 10000,
   RETRY_ATTEMPTS: 3
 };
 
@@ -104,7 +137,7 @@ export const SUCCESS_MESSAGES = {
   PROFILE_UPDATED: 'Profile updated successfully!'
 };
 
-// Feature Flags (for gradual rollout)
+// Feature Flags
 export const FEATURES = {
   ENABLE_NOTIFICATIONS: true,
   ENABLE_ANALYTICS: true,
@@ -131,7 +164,7 @@ export const CHART_COLORS = {
   PURPLE: '#8B5CF6'
 };
 
-// Breakpoints (for responsive design)
+// Breakpoints
 export const BREAKPOINTS = {
   SM: 640,
   MD: 768,
@@ -140,21 +173,20 @@ export const BREAKPOINTS = {
   '2XL': 1536
 };
 
-// Animation Durations (milliseconds)
+// Animation Durations
 export const ANIMATION = {
   FAST: 150,
   NORMAL: 300,
   SLOW: 500
 };
 
-// Local Storage Keys (if needed for non-artifact usage)
+// Local Storage Keys
 export const STORAGE_KEYS = {
   THEME: 'hotel_theme',
   LANGUAGE: 'hotel_language',
   PREFERENCES: 'hotel_preferences'
 };
 
-// Export default for convenience
 export default {
   ROOM_TYPES,
   BOOKING_STATUS,

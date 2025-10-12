@@ -15,13 +15,17 @@ const LoginPage = ({ onLogin, showToast }) => {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(''); // NEW: For API errors
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
+    // Clear errors when user types
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    if (apiError) {
+      setApiError('');
     }
   };
 
@@ -66,6 +70,7 @@ const LoginPage = ({ onLogin, showToast }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError(''); // Clear previous API errors
 
     if (!validateForm()) {
       return;
@@ -116,7 +121,10 @@ const LoginPage = ({ onLogin, showToast }) => {
         });
       }
     } catch (err) {
-      showToast(err.message || 'An error occurred', 'error');
+      // FIXED: Properly display API errors
+      const errorMessage = err.message || 'An error occurred';
+      setApiError(errorMessage);
+      showToast(errorMessage, 'error');
     } finally {
       setLoading(false);
     }
@@ -125,6 +133,7 @@ const LoginPage = ({ onLogin, showToast }) => {
   const switchMode = () => {
     setIsLogin(!isLogin);
     setErrors({});
+    setApiError(''); // Clear API error
     setFormData({
       username: '',
       email: '',
@@ -170,6 +179,16 @@ const LoginPage = ({ onLogin, showToast }) => {
             Register
           </button>
         </div>
+
+        {/* FIXED: API Error Display - Shows at top of form */}
+        {apiError && (
+          <div className="mb-4 p-3 rounded-lg bg-red-100 border border-red-300">
+            <div className="flex items-center gap-2 text-red-700">
+              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+              <span className="text-sm font-medium">{apiError}</span>
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Username */}

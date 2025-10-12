@@ -28,10 +28,13 @@ const DashboardPage = ({ user, showToast }) => {
         user.role === USER_ROLES.ADMIN ? api.getBookings() : api.getUserBookings(user.userId)
       ]);
 
-      const availableRooms = rooms.filter(r => r.available).length;
+      // FIXED: Count only truly available rooms (available = true in DB)
+      const availableRooms = rooms.filter(r => r.available === true).length;
+      
+      // FIXED: Count only active bookings (status = BOOKED)
       const activeBookings = bookings.filter(b => b.status === 'BOOKED').length;
       
-      // Calculate revenue (simplified)
+      // Calculate revenue (only completed bookings)
       const revenue = bookings
         .filter(b => b.status === 'COMPLETED')
         .reduce((sum, b) => {
@@ -41,8 +44,10 @@ const DashboardPage = ({ user, showToast }) => {
           return sum + (nights * (b.room?.price || 0));
         }, 0);
 
+      // FIXED: Calculate occupancy rate correctly
+      // Occupancy = (Total Rooms - Available Rooms) / Total Rooms * 100
       const occupancyRate = rooms.length > 0 
-        ? ((rooms.length - availableRooms) / rooms.length * 100).toFixed(1)
+        ? (((rooms.length - availableRooms) / rooms.length) * 100).toFixed(1)
         : 0;
 
       setStats({

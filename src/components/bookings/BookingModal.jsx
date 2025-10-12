@@ -79,7 +79,6 @@ const BookingModal = ({ isOpen, onClose, onSubmit, rooms, users, currentUser }) 
       status: formData.status
     };
 
-    console.log('Submitting booking data:', bookingData);
     onSubmit(bookingData);
   };
 
